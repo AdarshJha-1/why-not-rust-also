@@ -48,6 +48,28 @@ fn main() {
     let str4 = String::from("Some String");
     let (str5, str5_len) = calculate_str_len(str4);
     println!("{str5}, len: {str5_len}");
+
+    let str5_len = calculate_str_len_ref(&str5);
+    println!("with ref:: {str5_len}");
+    println!("can access str5 too: {str5}");
+
+
+    let mut str6 = String::from("NOOO");
+    change(&mut str6);
+
+    let mut str7 = String::from("i don't have variables name :(");
+
+    let str8 = &str7;
+    let str9 = &str7;
+
+    println!("str8: {str8},\n str9: {str9}");
+
+    let str10 = &mut str7;
+    println!("str10: {str10}");
+
+ //   let borrow_noting = dangle();
+    let take_ownership_str = no_dangle();
+    println!("{take_ownership_str}");
 }
 
 fn take_ownership(some_srting: String) {
@@ -74,3 +96,29 @@ fn calculate_str_len(s: String) -> (String, usize) {
 
     (s, str_len)
 }
+fn calculate_str_len_ref(s: &String) -> usize{
+    let str_len = s.len();
+     str_len
+}
+
+
+fn change(s: &mut String) {
+    s.push_str(", YOOO!!");
+}
+
+/*
+fn dangle() -> &String {
+    let s = String::from("This is not a valid code!");
+    &s
+}
+*/
+
+fn no_dangle() -> String {
+    let s = String::from("This is a valid code!");
+    s
+}
+
+
+
+
+
